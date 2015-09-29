@@ -72,7 +72,7 @@ public Action:death2runners(client,args) {
       return Plugin_Continue;
     } else {
       ClientCommand(client, "play ui/freeze_cam.wav");
-      CPrintToChat(client, MESSAGE, "There are already enough {green}Deaths.");
+      CPrintToChat(client, MESSAGE, "transfer fail");
       return Plugin_Handled;
     }
   }
