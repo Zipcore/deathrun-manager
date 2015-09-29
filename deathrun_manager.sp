@@ -12,6 +12,7 @@
 #define PLUGIN_VERSION "1.0"
 
 new Handle:drmg_version = INVALID_HANDLE;
+new Handle:drmg_enabled = INVALID_HANDLE;
 
 public Plugin:myinfo =
 {
@@ -28,4 +29,7 @@ public OnPluginStart() {
   HookEvent("player_death", Event_PlayerDeath);
   HookEvent("round_end", Event_RoundEnd);
   HookEvent("player_hurt", Event_PlayerHurt);
+
+  drmg_version = CreateConVar("drmg_version", PLUGIN_VERSION, "The current version of the manager", FCVAR_PLUGIN|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY|FCVAR_DONTRECORD);
+  drmg_enabled = CreateConVar("drmg_enabled", "1", "Enable or Disable the Manager: 0 = Disabled | 1 = Enabled.");
 }
