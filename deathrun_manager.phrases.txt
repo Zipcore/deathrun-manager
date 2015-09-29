@@ -4,6 +4,9 @@
 		"en"	"Deathrun Manager is {green}enabled."
 	}
 	"disabled" {
-		"en"	"Deathrun Manager is {red}disabled."
+		"en"	"Deathrun Manager is {green}disabled."
+	}
+	"credit" {
+		"en"	"This server is using {green}Deathrun Manager{default} created by {green}brownzilla."
 	}
 }

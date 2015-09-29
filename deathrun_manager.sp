@@ -38,7 +38,8 @@ public OnPluginStart() {
 public Event_RoundStart(Handle:event, const String:name[], bool:dontBroadcast) {
     if (GetConVarInt(drmg_enabled) == 1) {
       CPrintToChatAll(MESSAGE, "enabled");
-    } else {
+    } else if (GetConVarInt(drmg_enabled) == 0) {
       CPrintToChatAll(MESSAGE, "disabled");
     }
+    CPrintToChatAll(MESSAGE, "credit");
 }
