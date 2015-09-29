@@ -14,6 +14,7 @@
 
 new Handle:drmg_version = INVALID_HANDLE;
 new Handle:drmg_enabled = INVALID_HANDLE;
+new Handle:drmg_ratio = INVALID_HANDLE;
 
 public Plugin:myinfo =
 {
@@ -31,10 +32,12 @@ public OnPluginStart() {
 
   drmg_version = CreateConVar("drmg_version", PLUGIN_VERSION, "The current version of the manager", FCVAR_PLUGIN|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY|FCVAR_DONTRECORD);
   drmg_enabled = CreateConVar("drmg_enabled", "1", "Enable or Disable the Manager: 0 = Disabled | 1 = Enabled.");
-  drmg_ratio = CreatConVar("drmg_ratio", "5", "Change the Ratio of Deaths to Runners (Default 1 Death = 5 Runners).");
+  drmg_ratio = CreateConVar("drmg_ratio", "5", "Change the Ratio of Deaths to Runners (Default 1 Death = 5 Runners).");
 
   SetConVarString(drmg_version, PLUGIN_VERSION);
   AutoExecConfig( true, "deathrun_manager" );
+
+  RegConsoleCmd( "jointeam", death2runners );
 }
 
 public Event_RoundStart(Handle:event, const String:name[], bool:dontBroadcast) {
@@ -45,7 +48,7 @@ public Event_RoundStart(Handle:event, const String:name[], bool:dontBroadcast) {
     }
     CPrintToChatAll(MESSAGE, "credit");
 }
-public Action:death2runners(client,args) {
+public Action:death2runners(client, args) {
   new teamRatio = GetConVarInt(FindConVar("drmg_ratio"));
 
   decl String:teamString[3];
@@ -54,21 +57,21 @@ public Action:death2runners(client,args) {
 	new newTeam = StringToInt(teamString);
 	new oldTeam = GetClientTeam(client);
 
-  if (newTeam == TEAM_CT && oldTeam != TEAM_CT) {
+  if (newTeam == TEAM_T && oldTeam != TEAM_T) {
     new id = 0;
     new countTs = 0;
     new countCTs = 0;
-    for(id=1; id <= MaxClients; id++){
+    for(id=1; id <= MaxClients; id++) {
       if(IsClientInGame(id)){
-        if(GetClientTeam(id) == TEAM_T) {
+        if(GetClientTeam(id) == TEAM_T)  {
           countTs++;
         }
-        if(GetClientTeam(id) == TEAM_CT) {
+        if(GetClientTeam(id) == TEAM_CT){
           countCTs++;
         }
       }
     }
-    if (countCTs < ((countTs)/teamRatio) || !countCTs )) {
+    if ( countTs < ( ( countCTs ) / teamRatio ) || ! countTs ) {
       return Plugin_Continue;
     } else {
       ClientCommand(client, "play ui/freeze_cam.wav");
@@ -76,4 +79,5 @@ public Action:death2runners(client,args) {
       return Plugin_Handled;
     }
   }
+  return Plugin_Continue;
 }
