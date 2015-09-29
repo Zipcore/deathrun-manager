@@ -9,13 +9,7 @@
 	"disabled" {
 		"en"	"Deathrun Manager is {red}disabled."
 	}
-	"is dr" {
-		"en"	"The current map is {green}Deathrun Manager{default} compatible."
-	}
-	"not dr" {
-		"en"	"The current map is not {green}Deathrun Manager{default} compatible. {red}Disabling{default} {green}Deathrun Manager{default}"
-	}
 	"credit" {
-		"en"	"This server is currently using {green}Deathrun Manager{default} created by {red}brownzilla{default}."
+		"en"	"This server is currently using {green}Deathrun Manager."
 	}
 }

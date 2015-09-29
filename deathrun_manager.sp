@@ -38,17 +38,17 @@ public OnPluginStart() {
   AutoExecConfig(true, "deathrun_manager");
 }
 
-/*public OnMapStart() {
+public OnConfigsExecuted() {
   decl String:mapname[128];
   GetCurrentMap(mapname, sizeof(mapname));
   if(strncmp(mapname, "dr_", 3, false) == 0 || (strncmp(mapname, "deathrun_", 9, false) == 0)) {
-    CPrintToChatAll(MESSAGE, "is dr");
+    LogMessage("Deathrun map detected. Enabling Deathrun Manager.");
     SetConVarInt(drmg_enabled, 1);
   } else {
-    CPrintToChatAll(MESSAGE, "not dr");
+    LogMessage("Disabling Deathrun Manager.");
     SetConVarInt(drmg_enabled, 0);
   }
-}*/
+}
 
 public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast) {
   CPrintToChatAll(MESSAGE, "player death");
@@ -57,9 +57,7 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast) 
 public Event_RoundStart(Handle:event, const String:name[], bool:dontBroadcast) {
     if (GetConVarInt(drmg_enabled) == 1) {
       CPrintToChatAll(MESSAGE, "enabled");
-      CPrintToChatAll(MESSAGE, "credit");
     } else {
       CPrintToChatAll(MESSAGE, "disabled");
-      CPrintToChatAll(MESSAGE, "credit");
     }
 }
