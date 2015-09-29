@@ -1,0 +1,12 @@
+"Phrases"
+{
+	"player death" {
+		"en"	"A {red}player has died."
+	}
+	"enabled" {
+		"en"	"Deathrun Manager is {green}enabled."
+	}
+	"disabled" {
+		"en"	"Deathrun Manager is {red}disabled."
+	}
+}
