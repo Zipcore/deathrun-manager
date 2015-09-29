@@ -27,31 +27,12 @@ public Plugin:myinfo =
 public OnPluginStart() {
   LoadTranslations("deathrun_manager.phrases");
 
-  HookEvent("player_death", Event_PlayerDeath);
-  //HookEvent("round_end", Event_RoundEnd);
   HookEvent("round_start", Event_RoundStart);
 
   drmg_version = CreateConVar("drmg_version", PLUGIN_VERSION, "The current version of the manager", FCVAR_PLUGIN|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY|FCVAR_DONTRECORD);
   drmg_enabled = CreateConVar("drmg_enabled", "1", "Enable or Disable the Manager: 0 = Disabled | 1 = Enabled.");
 
   SetConVarString(drmg_version, PLUGIN_VERSION);
-  AutoExecConfig(true, "deathrun_manager");
-}
-
-public OnConfigsExecuted() {
-  decl String:mapname[128];
-  GetCurrentMap(mapname, sizeof(mapname));
-  if(strncmp(mapname, "dr_", 3, false) == 0 || (strncmp(mapname, "deathrun_", 9, false) == 0)) {
-    LogMessage("Deathrun map detected. Enabling Deathrun Manager.");
-    SetConVarInt(drmg_enabled, 1);
-  } else {
-    LogMessage("Disabling Deathrun Manager.");
-    SetConVarInt(drmg_enabled, 0);
-  }
-}
-
-public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast) {
-  CPrintToChatAll(MESSAGE, "player death");
 }
 
 public Event_RoundStart(Handle:event, const String:name[], bool:dontBroadcast) {
