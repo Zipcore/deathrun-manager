@@ -24,4 +24,8 @@ public Plugin:myinfo =
 
 public OnPluginStart() {
   LoadTranslations("deathrun_manager.phrases");
+
+  HookEvent("player_death", Event_PlayerDeath);
+  HookEvent("round_end", Event_RoundEnd);
+  HookEvent("player_hurt", Event_PlayerHurt);
 }
