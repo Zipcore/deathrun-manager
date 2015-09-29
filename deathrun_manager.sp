@@ -57,7 +57,9 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast) 
 public Event_RoundStart(Handle:event, const String:name[], bool:dontBroadcast) {
     if (GetConVarInt(drmg_enabled) == 1) {
       CPrintToChatAll(MESSAGE, "enabled");
+      CPrintToChatAll(MESSAGE, "This server is currently using {green}Deathrun Manager{default} created by {red}brownzilla{default}.");
     } else {
       CPrintToChatAll(MESSAGE, "disabled");
+      CPrintToChatAll(MESSAGE, "This server is currently using {green}Deathrun Manager{default} created by {red}brownzilla{default}.");
     }
 }
