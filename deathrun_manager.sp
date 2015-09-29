@@ -38,7 +38,7 @@ public OnPluginStart() {
   AutoExecConfig(true, "deathrun_manager");
 }
 
-public OnMapStart() {
+/*public OnMapStart() {
   decl String:mapname[128];
   GetCurrentMap(mapname, sizeof(mapname));
   if(strncmp(mapname, "dr_", 3, false) == 0 || (strncmp(mapname, "deathrun_", 9, false) == 0)) {
@@ -48,7 +48,7 @@ public OnMapStart() {
     CPrintToChatAll(MESSAGE, "not dr");
     SetConVarInt(drmg_enabled, 0);
   }
-}
+}*/
 
 public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast) {
   CPrintToChatAll(MESSAGE, "player death");
@@ -57,9 +57,9 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast) 
 public Event_RoundStart(Handle:event, const String:name[], bool:dontBroadcast) {
     if (GetConVarInt(drmg_enabled) == 1) {
       CPrintToChatAll(MESSAGE, "enabled");
-      CPrintToChatAll(MESSAGE, "This server is currently using {green}Deathrun Manager{default} created by {red}brownzilla{default}.");
+      CPrintToChatAll(MESSAGE, "credit");
     } else {
       CPrintToChatAll(MESSAGE, "disabled");
-      CPrintToChatAll(MESSAGE, "This server is currently using {green}Deathrun Manager{default} created by {red}brownzilla{default}.");
+      CPrintToChatAll(MESSAGE, "credit");
     }
 }
