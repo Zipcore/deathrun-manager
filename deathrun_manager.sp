@@ -38,9 +38,20 @@ public OnPluginStart() {
   AutoExecConfig(true, "deathrun_manager");
 }
 
+public OnMapStart() {
+  decl String:mapname[128];
+  GetCurrentMap(mapname, sizeof(mapname));
+  if(strncmp(mapname, "dr_", 3, false) == 0 || (strncmp(mapname, "deathrun_", 9, false) == 0)) {
+    CPrintToChatAll(MESSAGE, "is dr");
+    SetConVarInt(drmg_enabled, 1);
+  } else {
+    CPrintToChatAll(MESSAGE, "not dr");
+    SetConVarInt(drmg_enabled, 0);
+  }
+}
+
 public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast) {
-  new client = GetClientOfUserId(GetEventInt(event,"userid"));
-  CPrintToChatAll(MESSAGE, "player dead");
+  CPrintToChatAll(MESSAGE, "player death");
 }
 
 public Event_RoundStart(Handle:event, const String:name[], bool:dontBroadcast) {
