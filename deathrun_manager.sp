@@ -49,6 +49,7 @@ public Event_RoundStart(Handle:event, const String:name[], bool:dontBroadcast) {
     CPrintToChatAll(MESSAGE, "credit");
 }
 public Action:death2runners(client, args) {
+  if (GetConVarInt(drmg_enabled) == 1) {
   new teamRatio = GetConVarInt(FindConVar("drmg_ratio"));
 
   decl String:teamString[3];
@@ -80,4 +81,7 @@ public Action:death2runners(client, args) {
     }
   }
   return Plugin_Continue;
+} else if (GetConVarInt(drmg_enabled) == 0) {
+  CPrintToChatAll(MESSAGE, "ratio off");
+}
 }

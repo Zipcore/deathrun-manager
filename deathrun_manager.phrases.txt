@@ -12,4 +12,7 @@
 	"transfer fail" {
 		"en"	"There are already enough {green}Deaths."
 	}
+	"ratio off" {
+		"en"	"Ratios are {green}disabled."
+	}
 }
