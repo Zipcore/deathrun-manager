@@ -10,7 +10,7 @@
 #define MESSAGE "[{green}Deathrun{default}] %t"
 #define TEAM_T 2
 #define TEAM_CT 3
-#define PLUGIN_VERSION "1.0"
+#define PLUGIN_VERSION "1.9a"
 
 new Handle:drmg_version = INVALID_HANDLE;
 new Handle:drmg_enabled = INVALID_HANDLE;
@@ -38,6 +38,18 @@ public OnPluginStart() {
   AutoExecConfig( true, "deathrun_manager" );
 
   RegConsoleCmd( "jointeam", death2runners );
+}
+
+public OnConfigsExecuted() {
+  decl String:mapname[128];
+  GetCurrentMap(mapname, sizeof(mapname));
+  if(strncmp(mapname, "dr_", 3, false) == 0 || (strncmp(mapname, "deathrun_", 9, false) == 0)) {
+    CPrintToChatAll(MESSAGE, "is dr");
+    SetConVarInt(drmg_enabled, 1);
+  } else {
+    CPrintToChatAll(MESSAGE, "not dr");
+    SetConVarInt(drmg_enabled, 0);
+  }
 }
 
 public Event_RoundStart(Handle:event, const String:name[], bool:dontBroadcast) {
@@ -80,8 +92,8 @@ public Action:death2runners(client, args) {
       return Plugin_Handled;
     }
   }
-  return Plugin_Continue;
 } else if (GetConVarInt(drmg_enabled) == 0) {
   CPrintToChatAll(MESSAGE, "ratio off");
 }
+  return Plugin_Continue;
 }
